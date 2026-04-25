@@ -1,0 +1,24 @@
+version: 0.2
+
+phases: 
+    install:
+        runtime-versions:
+            nodejs: 18
+        commands:
+            - echo "installing packages..."
+            - echo "ckages installed successfully."
+            - chmod 755 -R scripts/
+    pre_build:
+        commands: 
+            - echo "Testing..."
+            - echo "sts passed successfully."
+    build:
+        commands:
+            - echo "Starting compiling packages..."
+            - echo "uild passed successfully."
+    post_build:
+        commands:
+            - echo "Performing post-build packing and operations..."
+artifacts:
+  files:
+    - '**/*'

@@ -1,0 +1,49 @@
+{
+  "user": {
+    "USER_NOT_FOUND": "user not found",
+    "EMAIL_EXISTENT": "User already exists with this Email",
+    "USER_NAME_EXISTENT": "User name already exists",
+    "MOBILE_EXISTENT": "mobile number already exists",
+    "TEACHER_NOT_FOUND": "Teacher account not found",
+    "UNABLE_TO_UPDATE_LOCATION": "Unable to update location",
+    "USER_LOCATION_UPDATED": "User location updated",
+    "UNABLE_TO_LOGIN": "Unable to log in",
+    "USER_LOGGED_IN": "User logged in successfully",
+    "UNABLE_TO_ONBOARD_USER": "Unable to onboard",
+    "USER_ONBOARDED": "User onboard successfully"
+  },
+  "event": {
+    "EVENT_NOT_FOUND": "event not found"
+  },
+
+  "room": {
+    "ROOM_EXISTENT": "Room already created with this name.",
+    "ROOM_CREATED": "Room created successfully",
+    "UNABLE_TO_CREATE_ROOM": "Unable to create room"
+  },
+  "validationErrorMessages": {
+    "email": "Email Address is required.",
+    "password": "Password is required.",
+    "id": "please provide valid Id",
+    "status": "please provide valid status of customer",
+    "userId": "please provide valid userId",
+    "shortdesc": "short description is required!",
+    "title": "unique title is required",
+    "resetToken": "reset token is required for reset password",
+    "deviceToken": "Device token is required for login",
+    "razorpay_order_id": "payment id is required"
+  },
+  "errorMessages": {
+    "methodNotAllowed": "this is not proper http method"
+  },
+  "server": {
+    "SOMETHING_WRONG": "Something went wrong."
+  },
+  "auth": {
+    "TOKEN_EXPIRED": "Access token is Expired. Please Authenticate Again.",
+    "NOT_TOKEN": "Please Authenticate.",
+    "UNAUTHORIZED": "You are not Authorised to do this operation.",
+    "NEW_ACCESS_TOKEN": "New access token is generated.",
+    "ACCOUNT_DELETED": "Your account is deleted. Please contact your administrator."
+  }
+}
