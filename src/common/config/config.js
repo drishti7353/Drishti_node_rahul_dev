@@ -25,10 +25,9 @@ const envVarsSchema = Joi.object()
     TWILIO_PHONE_NUMBER: Joi.string().required(),
     CRYPT_PASSWORD: Joi.string().required(),
     IV: Joi.string().required(),
-    AWS_ACCESS_KEY_ID: Joi.string().required(),
-    AWS_SECRET_ACCESS_KEY: Joi.string().required(),
-    AWS_REGION: Joi.string().required(),
-    S3_BUCKET_NAME: Joi.string().required(),
+    CLOUDINARY_CLOUD_NAME: Joi.string().required(),
+    CLOUDINARY_API_KEY: Joi.string().required(),
+    CLOUDINARY_API_SECRET: Joi.string().required(),
   })
   .unknown();
 
@@ -70,10 +69,9 @@ module.exports = {
     Iv: envVars.IV,
     CryptoPassword: envVars.CRYPT_PASSWORD,
   },
-  aws: {
-    awsAccessKeyId: envVars.AWS_ACCESS_KEY_ID,
-    awsSecretAccessKey: envVars.AWS_SECRET_ACCESS_KEY,
-    awsRegion: envVars.AWS_REGION,
-    s3Bucket: envVars.S3_BUCKET_NAME,
+  cloudinary: {
+    cloudName: envVars.CLOUDINARY_CLOUD_NAME,
+    apiKey: envVars.CLOUDINARY_API_KEY,
+    apiSecret: envVars.CLOUDINARY_API_SECRET,
   },
 };

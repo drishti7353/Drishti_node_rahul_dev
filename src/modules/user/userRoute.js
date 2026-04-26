@@ -67,7 +67,7 @@ const { ROLES } = require("../../common/utils/constants");
 const auth = require("../../middleware/authentication");
 const methodNotAllowed = require("../../middleware/methodNotAllowed");
 const validate = require("../../middleware/validate");
-const { uploadToS3 } = require("../../common/utils/uploadToS3");
+
 
 router.route("/")
   .get(auth([ROLES.USER, ROLES.ADMIN, ROLES.TEACHER]), getUser)

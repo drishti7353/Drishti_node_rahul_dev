@@ -4,6 +4,18 @@
 .env.*
 !.env.example
 
+# Credentials and Keys
+*.json
+*.pem
+*.pub
+!package.json
+!package-lock.json
+!composer.json
+!tsconfig.json
+!jsconfig.json
+!src/locales/**/*.json
+!src/common/utils/status.json
+
 *.class
 *.log
 *.pyc

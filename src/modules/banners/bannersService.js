@@ -1,6 +1,6 @@
 const appError = require("../../common/utils/appError");
 const httpStatus = require("../../common/utils/status.json");
-const { deleteFromS3 } = require("../../common/utils/uploadToS3");
+const { deleteFromCloudinary } = require("../../common/utils/uploadToCloudinary");
 const Banners = require("../../models/banners");
 
 async function createBanner(request) {
@@ -11,11 +11,11 @@ async function createBanner(request) {
     );
   }
   const banners = request.files.banners.map(async (banner) => {
-    if (!banner || !banner.location) {
+    if (!banner || !banner.path) {
       throw new appError(httpStatus.BAD_REQUEST, "Invalid banner data.");
     }
     return Banners.create({
-      image: banner.location,
+      image: banner.path,
     });
   });
 
@@ -28,7 +28,7 @@ async function getBanners(request) {
 const deleteBanner = async (request) => {
   try {
     const banner = await Banners.findById(request.params.id);
-    await deleteFromS3(banner.image);
+    await deleteFromCloudinary(banner.image);
     return await Banners.findByIdAndDelete(request.params.id);
   } catch (error) {
     throw new appError(httpStatus.BAD_REQUEST, error.message);
@@ -37,10 +37,10 @@ const deleteBanner = async (request) => {
 const editBanner = async (request) => {
   try {
     const banner = await Banners.findById(request.params.id);
-    await deleteFromS3(banner.image);
+    await deleteFromCloudinary(banner.image);
     return await Banners.findByIdAndUpdate(
       request.params.id,
-      { image: request?.files?.banners[0]?.location },
+      { image: request?.files?.banners[0]?.path },
       { new: true }
     );
   } catch (error) {

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { uploadToS3 } = require("../../common/utils/uploadToS3");
+const { uploadToCloudinary } = require("../../common/utils/uploadToCloudinary");
 const bannerController = require("./bannersController");
 
 const auth = require("../../middleware/authentication");
@@ -13,7 +13,7 @@ router
   .route("/addBanners")
   .post(
     auth(ROLES.ALL),
-    uploadToS3.fields([{ name: "banners", maxCount: 10 }]),
+    uploadToCloudinary.fields([{ name: "banners", maxCount: 10 }]),
     bannerController.createBanners
   )
   .all(methodNotAllowed);
@@ -25,7 +25,7 @@ router
   .route("/editBanners/:id")
   .patch(
     auth(ROLES.ALL),
-    uploadToS3.fields([{ name: "banners", maxCount: 1 }]),
+    uploadToCloudinary.fields([{ name: "banners", maxCount: 1 }]),
     bannerController.editBanners
   )
   .all(methodNotAllowed);
