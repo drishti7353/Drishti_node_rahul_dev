@@ -6,7 +6,7 @@ const { createToken } = require("../../middleware/genrateTokens");
 const { ROLES } = require("../../common/utils/constants");
 const { encode, decode } = require("../../common/utils/crypto");
 const { generateOTP } = require("../../common/utils/helpers");
-const { uploadToS3, deleteFromS3 } = require("../../common/utils/uploadToS3");
+
 const constants = require("../../common/utils/constants");
 const sendSms = require("../../common/utils/messageService");
 const OtpRecord = require('../../models/otp');
