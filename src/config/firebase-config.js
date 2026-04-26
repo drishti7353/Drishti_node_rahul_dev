@@ -6,8 +6,8 @@ const initializeFirebase = () => {
       const config = {
         credential: admin.credential.cert({
           projectId: process.env.FIREBASE_PROJECT_ID || "srisridrishti-c1673",
-          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n') || require('../common/utils/firebase_admin.json').private_key,
-          clientEmail: process.env.FIREBASE_CLIENT_EMAIL || "firebase-adminsdk-v46td@srisridrishti-c1673.iam.gserviceaccount.com",
+          privateKey: (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL || '',
         })
       };
 

@@ -1,5 +1,4 @@
-const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccountKey.json');
+const { admin } = require('../../config/firebase-config');
 const mongoose = require('mongoose'); // Add this line
 const moment = require('moment-timezone'); // Add this line
 

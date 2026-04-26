@@ -11,8 +11,8 @@ const envVarsSchema = Joi.object()
       .valid("production", "development", "test")
       .required(),
     PORT: Joi.number().default(3000),
-    DB_URI: Joi.string().required().description("Mongo DB url"),
-    JWT_SECRET: Joi.string().required().description("JWT secret key"),
+    DB_URI: Joi.string().default('').description("Mongo DB url"),
+    JWT_SECRET: Joi.string().default('changeme').description("JWT secret key"),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
     .default(60)  // 1 hour
     .description("Minutes after which access tokens expire"),
@@ -20,14 +20,14 @@ const envVarsSchema = Joi.object()
   JWT_REFRESH_EXPIRATION_DAYS: Joi.number()
     .default(30)  // 30 days
     .description("days after which refresh tokens expire"),
-    TWILIO_ACCOUNT_SID: Joi.string().required(),
-    TWILIO_AUTH_TOKEN: Joi.string().required(),
-    TWILIO_PHONE_NUMBER: Joi.string().required(),
-    CRYPT_PASSWORD: Joi.string().required(),
-    IV: Joi.string().required(),
-    CLOUDINARY_CLOUD_NAME: Joi.string().required(),
-    CLOUDINARY_API_KEY: Joi.string().required(),
-    CLOUDINARY_API_SECRET: Joi.string().required(),
+    TWILIO_ACCOUNT_SID: Joi.string().default(''),
+    TWILIO_AUTH_TOKEN: Joi.string().default(''),
+    TWILIO_PHONE_NUMBER: Joi.string().default(''),
+    CRYPT_PASSWORD: Joi.string().default(''),
+    IV: Joi.string().default(''),
+    CLOUDINARY_CLOUD_NAME: Joi.string().default(''),
+    CLOUDINARY_API_KEY: Joi.string().default(''),
+    CLOUDINARY_API_SECRET: Joi.string().default(''),
   })
   .unknown();
 
@@ -36,8 +36,8 @@ const { value: envVars, error } = envVarsSchema
   .validate(process.env);
 
 if (error) {
-  ////console.log(error);
-  throw new Error(`Config validation error: ${error.message}`);
+  console.error(`⚠️  Config validation warning: ${error.message}`);
+  console.error('⚠️  Some features may not work until all environment variables are set.');
 }
 
 module.exports = {

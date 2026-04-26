@@ -1,10 +1,6 @@
-const firebase = require("firebase-admin");
-const credentials = require("./credentials.json");
+// Legacy compatibility wrapper — uses centralized firebase-config.js
+const { admin } = require("../../config/firebase-config");
 
-firebase.initializeApp({
-  credential: firebase.credential.cert(credentials),
-  storageBucket: "drishti-3dd03.appspot.com",
-});
 module.exports = {
-  firebase,
+  firebase: admin,
 };
