@@ -67,38 +67,40 @@ mongoose.set("debug", true);
 let server;
 let io;
 
+server = app.listen(config.port, '0.0.0.0', () => {
+  logger.info(`Listening to port ${config.port}`);
+  
+  // Initialize Socket.IO
+  const { Server } = require('socket.io');
+  io = new Server(server, {
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST']
+    }
+  });
+  // Make io accessible globally (or via setter)
+  global._io = io;
+  // Setup namespace for nearby users
+  const nearbyNamespace = io.of('/ws/nearby');
+  nearbyNamespace.use((socket, next) => {
+    // TODO: Add authentication logic here (token/userId)
+    next();
+  });
+  nearbyNamespace.on('connection', (socket) => {
+    console.log('User connected to /ws/nearby:', socket.id);
+    socket.on('disconnect', () => {
+      console.log('User disconnected from /ws/nearby:', socket.id);
+    });
+  });
+});
+
 mongoose
   .connect(config.mongoose.url)
   .then(() => {
     logger.info("Connected to MongoDB");
-    server = app.listen(config.port, () => {
-      logger.info(`Listening to port ${config.port}`);
-      // Initialize Socket.IO
-      const { Server } = require('socket.io');
-      io = new Server(server, {
-        cors: {
-          origin: '*',
-          methods: ['GET', 'POST']
-        }
-      });
-      // Make io accessible globally (or via setter)
-      global._io = io;
-      // Setup namespace for nearby users
-      const nearbyNamespace = io.of('/ws/nearby');
-      nearbyNamespace.use((socket, next) => {
-        // TODO: Add authentication logic here (token/userId)
-        next();
-      });
-      nearbyNamespace.on('connection', (socket) => {
-        console.log('User connected to /ws/nearby:', socket.id);
-        socket.on('disconnect', () => {
-          console.log('User disconnected from /ws/nearby:', socket.id);
-        });
-      });
-    });
   })
   .catch((error) => {
-    logger.error(error.message);
+    logger.error("MongoDB Connection Error: " + error.message);
   });
 
 const unexpectedErrorHandler = (error) => {
