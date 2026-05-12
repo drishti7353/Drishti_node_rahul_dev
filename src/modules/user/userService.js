@@ -586,15 +586,15 @@ async function getAllTeachers() {
   return await User.find({ role: ROLES.TEACHER });
 }
 
-async function actionOnTeacherAccount(request) {
-  let { status, id } = request.query;
+async function actionOnTeacherAccount({ teacherId, status, adminId }) {
+  const id = teacherId;
 
   try {
     const user = await User.findById(id);
     if (!user) {
       throw new appError(
         httpStatus.NOT_FOUND,
-        request.t("user.TEACHER_NOT_FOUND")
+        "Teacher not found"
       );
     }
 
@@ -602,12 +602,12 @@ async function actionOnTeacherAccount(request) {
       id,
       {
         teacherRoleApproved: status,
-        teacherRequestHandledBy: request.user.id,
+        teacherRequestHandledBy: adminId,
       },
       { new: true }
     );
   } catch (error) {
-    throw new appError(error.status, error.message);
+    throw new appError(error.status || httpStatus.INTERNAL_SERVER_ERROR, error.message || "Failed to process teacher action");
   }
 }
 
